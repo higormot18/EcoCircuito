@@ -1,0 +1,27 @@
+graph C {
+ graph [layout=neato, overlap=false, splines=true, sep="+18", bgcolor="white", pad=0.3, fontname="Helvetica"];
+ node [fontname="Helvetica", fontsize=12];
+ edge [color="#555555", fontname="Helvetica", fontsize=11, fontcolor="#B03030", len=1.6];
+ node [shape=box, style="filled,rounded", fillcolor="#E3F1E6", color="#2E7D4F", penwidth=1.5];
+ MUNICIPIO; GERADOR; RECICLADOR; PONTO [label="PONTO DE COLETA"]; CATEGORIA [label="CATEGORIA DE RESÍDUO"]; MATERIAL;
+ node [fillcolor="#E6EEF8", color="#2B5C8A"];
+ ENTREGA; ITEM [label="ITEM DE RESÍDUO"]; LOTE;
+ node [fillcolor="#F6EEDC", color="#9A6A16"];
+ CERT [label="CERTIFICADO DE\nDESTINAÇÃO"]; HIST [label="HISTÓRICO\nDE STATUS"];
+ node [shape=diamond, style=filled, fillcolor="#FFFFFF", color="#777777", fontsize=10, penwidth=1];
+ r1 [label="faz"]; r2 [label="recebe"]; r3 [label="contém"]; r4 [label="classifica"]; r5 [label="compõe\n(%)"];
+ r6 [label="agrupa"]; r7 [label="envia"]; r8 [label="processa"]; r9 [label="gera\n(kg)"]; r10 [label="comprova"]; r11 [label="registra"];
+ r12a [label="mora em"]; r12b [label="fica em"]; r12c [label="fica em"];
+ GERADOR -- r1 [label="1"]; r1 -- ENTREGA [label="N"];
+ PONTO -- r2 [label="1"]; r2 -- ENTREGA [label="N"];
+ ENTREGA -- r3 [label="1"]; r3 -- ITEM [label="N"];
+ CATEGORIA -- r4 [label="1"]; r4 -- ITEM [label="N"];
+ CATEGORIA -- r5 [label="N"]; r5 -- MATERIAL [label="N"];
+ LOTE -- r6 [label="0..1"]; r6 -- ITEM [label="N"];
+ PONTO -- r7 [label="1"]; r7 -- LOTE [label="N"];
+ RECICLADOR -- r8 [label="1"]; r8 -- LOTE [label="N"];
+ LOTE -- r9 [label="N"]; r9 -- MATERIAL [label="N"];
+ LOTE -- r10 [label="1"]; r10 -- CERT [label="1"];
+ ITEM -- r11 [label="1"]; r11 -- HIST [label="N"];
+ GERADOR -- r12a [label="N"]; r12a -- MUNICIPIO [label="1"]; PONTO -- r12b [label="N"]; r12b -- MUNICIPIO [label="1"]; RECICLADOR -- r12c [label="N"]; r12c -- MUNICIPIO [label="1"];
+}
